@@ -16,3 +16,4 @@ createRoot(document.getElementById('root')!, {
   </ErrorBoundary>,
 );
 
+// Keeps caught errors off reportError(), which would raise the dev overlay.
