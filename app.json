@@ -1,0 +1,4 @@
+{
+  "expo":{"name":"Sunday School","slug":"sunday-school-mobile","version":"1.0.0","orientation":"portrait","userInterfaceStyle":"automatic","scheme":"sundayschool","android":{"package":"com.sundayschool.app","versionCode":1,"permissions":["NOTIFICATIONS"]},"ios":{"bundleIdentifier":"com.sundayschool.app"},"plugins":["expo-router","expo-notifications"]},
+  "experiments":{"typedRoutes":true}
+}
