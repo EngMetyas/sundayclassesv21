@@ -1,7 +1,0 @@
-import { db, json, url, service, currentUser, profile } from './_common';
-export default async function handler(req:any,res:any){
- if(req.method!=='POST')return res.status(405).json({error:'Method not allowed'});
- if(!url||!service)return res.status(500).json({error:'Notification server variables are missing.'});
- try{const user=await currentUser(req);if(!user)return res.status(401).json({error:'Unauthorized'});const me=await profile(user.id);if(!me)return res.status(403).json({error:'Profile not found'});const {subscription,preferences={}}=req.body||{};if(!subscription?.endpoint||!subscription?.keys?.p256dh||!subscription?.keys?.auth)return res.status(400).json({error:'Invalid push subscription'});
- await db('push_subscriptions',{method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify({user_id:user.id,endpoint:subscription.endpoint,p256dh:subscription.keys.p256dh,auth:subscription.keys.auth,user_agent:req.headers['user-agent']||null,updated_at:new Date().toISOString(),active:true,daily_verse:preferences.daily_verse!==false,announcements:preferences.announcements!==false,visits:preferences.visits!==false,chat:preferences.chat!==false,events:preferences.events!==false,challenges:preferences.challenges!==false})});
- return res.status(200).json({ok:true});}catch(e:any){return res.status(500).json({error:e.message||'Failed to save subscription'})}}
